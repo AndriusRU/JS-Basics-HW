@@ -2,56 +2,37 @@ const arrSliders = Array.from(document.querySelectorAll('.slider__item'));
 const arrSliderDots = Array.from(document.querySelectorAll('.slider__dot'));
 const prevSlider = document.querySelector('.slider__arrow_prev');
 const nextSlider = document.querySelector('.slider__arrow_next');
-let curSlider = 0;
+let currentSlider = 0;
 
-function getActiveSlide() {
+function setActiveSlide(index) {
+    let indexSlider = index;
+    currentSlider = arrSliders.findIndex(slider => slider.classList.contains('slider__item_active'))
+    arrSliders[currentSlider].classList.remove('slider__item_active');
+    arrSliderDots[currentSlider].classList.remove('slider__dot_active');
     
-    for (let i = 0; i < arrSliders.length; i++) {
-        if (arrSliders[i].classList.contains('slider__item_active')) {
-            curSlider = i;
-            break;
-        }
-    }
-    return curSlider;
+    if (index < 0) indexSlider = arrSliders.length - 1;
+    if (index > arrSliders.length - 1) indexSlider = 0;
+
+    arrSliders[indexSlider].classList.add('slider__item_active');
+    arrSliderDots[indexSlider].classList.add('slider__dot_active');
 }
 
 prevSlider.onclick = () => {
-    arrSliders[curSlider].classList.remove('slider__item_active');
-    arrSliderDots[curSlider].classList.remove('slider__dot_active');
-    if (curSlider === 0) {
-        arrSliders[arrSliders.length - 1].classList.add('slider__item_active');
-        arrSliderDots[arrSliderDots.length - 1].classList.add('slider__dot_active');
-    } else {
-        arrSliders[curSlider - 1].classList.add('slider__item_active');
-        arrSliderDots[curSlider - 1].classList.add('slider__dot_active');
-    }
-    getActiveSlide();
+    let index = arrSliders.findIndex(slider => slider.classList.contains('slider__item_active'));
+    setActiveSlide(index - 1);
 }
 
 nextSlider.onclick = () => {
-    arrSliders[curSlider].classList.remove('slider__item_active');
-    arrSliderDots[curSlider].classList.remove('slider__dot_active');
-
-    if (curSlider === arrSliders.length - 1) {
-        arrSliders[0].classList.add('slider__item_active');
-        arrSliderDots[0].classList.add('slider__dot_active');
-    } else {
-        arrSliders[curSlider + 1].classList.add('slider__item_active');
-        arrSliderDots[curSlider + 1].classList.add('slider__dot_active');
-    }
-    getActiveSlide();
+    let index = arrSliders.findIndex(slider => slider.classList.contains('slider__item_active'));
+    setActiveSlide(index + 1);
 }
 
 arrSliderDots.forEach((item, index) => {
     item.onclick = () => {
-        arrSliders[curSlider].classList.remove('slider__item_active');
-        arrSliderDots[curSlider].classList.remove('slider__dot_active');
-        arrSliders[index].classList.add('slider__item_active');
-        arrSliderDots[index].classList.add('slider__dot_active');
-        getActiveSlide();
+        setActiveSlide(index);
     }
 })
 
-arrSliderDots[curSlider].classList.add('slider__dot_active');
+arrSliderDots[currentSlider].classList.add('slider__dot_active');
 
 
