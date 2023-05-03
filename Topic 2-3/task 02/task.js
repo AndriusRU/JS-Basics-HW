@@ -30,9 +30,35 @@ class Game {
             (event) => {
                 if (event.key == this.currentSymbol.textContent) this.success()
                 else this.fail();
-            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log(this);
+            this.countDown();
+        });
+
     }
-  
+    
+    countDown() {
+
+        function updateTime() {
+            let time = document.getElementById('time');
+            let timeleft = Number(time.textContent) - 1;
+            time.textContent = timeleft;
+            if (timeleft === 0) {
+                clearInterval(timer);
+                console.log(this);
+                //this.fail();
+            }
+        }
+
+        let timer = setInterval(updateTime, 1000);
+    }
+
+    getTime() {
+        return Number(document.getElementById('time').textContent);
+    }
+
     success() {
         if(this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
         this.currentSymbol.classList.add('symbol_correct');
@@ -62,6 +88,9 @@ class Game {
         const word = this.getWord();
 
         this.renderWord(word);
+        const time = document.getElementById('time');
+        time.textContent = this.getLength(word);
+
     }
   
     getWord() {
@@ -82,6 +111,12 @@ class Game {
   
         return words[index];
     }
+
+    getLength(word) {
+        return word.length;
+    }
+
+
   
     renderWord(word) {
         const html = [...word]
