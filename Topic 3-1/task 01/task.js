@@ -22,8 +22,3 @@ window.addEventListener('scroll', (event) => {
     })
 })
 
-
-
-setInterval(() => {
-    //console.log(isVisible(blocks));
-}, 1000);
