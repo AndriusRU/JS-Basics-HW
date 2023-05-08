@@ -4,6 +4,7 @@ class Game {
         this.wordElement = container.querySelector('.word');
         this.winsElement = container.querySelector('.status__wins');
         this.lossElement = container.querySelector('.status__loss');
+        this.timer;
 
         this.reset();
 
@@ -32,27 +33,17 @@ class Game {
                 else this.fail();
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log(this);
-            this.countDown();
-        });
-
     }
     
     countDown() {
-
-        function updateTime() {
+        this.timer = setInterval(() => {
             let time = document.getElementById('time');
             let timeleft = Number(time.textContent) - 1;
             time.textContent = timeleft;
             if (timeleft === 0) {
-                clearInterval(timer);
-                console.log(this);
-                //this.fail();
+                this.fail();
             }
-        }
-
-        let timer = setInterval(updateTime, 1000);
+        }, 1000);
     }
 
     getTime() {
@@ -90,6 +81,10 @@ class Game {
         this.renderWord(word);
         const time = document.getElementById('time');
         time.textContent = this.getLength(word);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            this.countDown();
+        });
 
     }
   
