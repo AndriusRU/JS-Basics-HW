@@ -7,10 +7,14 @@ const cart = document.querySelector('.cart');
 function deleteItem(event) {
     const cartProduct = event.target.closest('.cart__product');
 
-    if (cartProduct) cartProduct.remove();
+    if (cartProduct) {
+        cartProduct.remove();
+    }
 
-    const countCartProducts = cartProducts.querySelectorAll('.cart__product').length
-    if (!countCartProducts) cart.style.display = 'none'
+    const countCartProducts = cartProducts.querySelectorAll('.cart__product').length;
+    if (!countCartProducts) {
+        cart.style.display = 'none';
+    }
 
 }
 
@@ -18,7 +22,7 @@ function addItem(event) {
     const elem = event.target;
     const product = elem.closest('.product');
     const productId = product.dataset.id;
-    const count = Number(product.querySelector('.product__quantity-value').textContent)
+    const count = Number(product.querySelector('.product__quantity-value').textContent);
     const src = product.querySelector('img').src;
    
     const curProduct = cartProducts.querySelector(`.cart__product[data-id="${productId}"]`);
