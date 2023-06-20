@@ -56,5 +56,7 @@ cart.addEventListener('click', deleteItem);
 
 document.addEventListener('DOMContentLoaded', () => {
     const countCartProducts = cartProducts.querySelectorAll('.cart__product').length
-    if (!countCartProducts) cart.style.display = 'none'
+    if (!countCartProducts) {
+        cart.style.display = 'none';
+    }
 })

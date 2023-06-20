@@ -5,8 +5,10 @@ Array.from(listHint).forEach((item, index) => {
         event.preventDefault();
 
         const hint = document.querySelector('.tooltip_active')
+        const coords = item.getBoundingClientRect();
+
         if (hint) {
-            console.log(hint)
+            
             if (hint.textContent !== item.getAttribute('title')) {
                 hint.remove();
                 
@@ -14,7 +16,8 @@ Array.from(listHint).forEach((item, index) => {
         
                 listHint[index].insertAdjacentHTML('afterEnd',textHTML);
                 document.querySelector('.tooltip').classList.toggle('tooltip_active');
-                document.querySelector('.tooltip').dataset.position = "right";
+                document.querySelector('.tooltip').style.left = coords.left + 'px';
+                document.querySelector('.tooltip').style.top = coords.top + 25 + 'px';
             } else {
                 hint.remove();
             }
@@ -24,7 +27,8 @@ Array.from(listHint).forEach((item, index) => {
         
             listHint[index].insertAdjacentHTML('afterEnd',textHTML);
             document.querySelector('.tooltip').classList.toggle('tooltip_active');
-            document.querySelector('.tooltip').dataset.position = "right";
+            document.querySelector('.tooltip').style.left = coords.left + 'px';
+            document.querySelector('.tooltip').style.top = coords.top + 25 + 'px';
         }
     })
 })
