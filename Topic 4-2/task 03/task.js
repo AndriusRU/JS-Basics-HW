@@ -3,11 +3,6 @@ const sign = document.getElementById('signin');
 const welcome = document.getElementById('welcome');
 const btnLogout = document.getElementById('logout__btn');
 
-function clearData(form) {
-    form.login.value = '';
-    form.password.value = '';
-}
-
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     
@@ -30,19 +25,19 @@ form.addEventListener('submit', (event) => {
                 welcome.classList.toggle('welcome_active');
             } else {
                 alert('Неверный логин/пароль');
-                clearData(form);
+                form.reset();
             }
         }
     })
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    clearData(form);
+    form.reset();
 })
 
 
 btnLogout.addEventListener('click', () => {
     welcome.classList.toggle('welcome_active');
     sign.classList.toggle('signin_active');
-    clearData(form);
+    form.reset();
 })

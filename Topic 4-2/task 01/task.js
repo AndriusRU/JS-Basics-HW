@@ -6,9 +6,7 @@ editor.addEventListener('keyup', () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('textArea')) {
-        editor.value = localStorage.getItem('textArea');
-    }
+    editor.value = localStorage.getItem('textArea');
 })
 
 clearText.addEventListener('click', () => {
